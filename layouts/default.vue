@@ -4,9 +4,9 @@
       <my-header></my-header>
     </el-header>
     <el-main>
-      <nuxt />
+      <!-- <h1 style="width:100%;height:300px;background:red">main</h1> -->
     </el-main>
-    <el-footer>Footer</el-footer>
+    <!-- <el-footer>Footer</el-footer> -->
   </el-container>
 </template>
 <script>
@@ -18,4 +18,5 @@ export default {
 };
 </script>
 <style  lang="scss">
+@import "@/assets/css/public/layout.scss";
 </style>

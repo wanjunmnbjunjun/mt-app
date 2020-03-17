@@ -41,22 +41,20 @@ a {
   color: #999;
   text-decoration: none;
 }
-a:hover, a:focus, a:visited{
+a:hover, a:focus {
   color: #FE8C00;
 }
 .m-l-10{
   margin-left: 10px;
 }
-
-
-/* .logo {
-  width: 243px;
-  height: 218px;
+ul{
+  list-style: none;
 }
+
 
 .page-enter-active, .page-leave-active{
   transition: opacity .5s
 }
 .page-enter, .page-leave-active{
   opacity: 0
-} */
+}

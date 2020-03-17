@@ -3,16 +3,22 @@
     <el-row :gutter="0">
       <el-col :span="5">
         <div class="m-geo">
-          <i class="el-icon-location" />
-          <nuxt-link class="changeCity" to="/changeCity">切换城市</nuxt-link>[太原 北京 鞍山]
+          <i class="el-icon-location" />北京
+          <nuxt-link class="changeCity" to="/changeCity">切换城市</nuxt-link>
+          <span>[</span>
+          <nuxt-link to="/changeCity">太原</nuxt-link>
+          <nuxt-link to="/changeCity">鞍山</nuxt-link>
+          <nuxt-link to="/changeCity">福州</nuxt-link>
+          <span>]</span>
+
         </div>
       </el-col>
       <el-col :span="5">
         <div class="m-user">
           <template v-if="user">
             欢迎您，
-            <span>wwj</span>
-            <nuxt-link to="/exit">退出</nuxt-link>
+            <span class="user">wwj</span>
+            <nuxt-link to="/exit" class="exit">退出</nuxt-link>
           </template>
           <template v-else>
             <nuxt-link to="/login" class="login">立即登陆</nuxt-link>
@@ -21,14 +27,8 @@
         </div>
       </el-col>
       <el-col :span="14">
-        <div class="m-nav">
-          <ul class="nav">
-            <li>我的美团</li>
-            <li>手机APP</li>
-            <li>商家中心</li>
-            <li>网站导航</li>
-          </ul>
-        </div>
+        <my-nav></my-nav>
+        
       </el-col>
     </el-row>
     <el-row>
@@ -38,7 +38,11 @@
 </template>
 
 <script>
+import MyNav from "./nav"
 export default {
+  components:{
+    MyNav
+  },
   data() {
     return {
       user: false
@@ -48,5 +52,6 @@ export default {
 </script>
 
 <style lang="scss" >
-@import "@/assets/css/public/layout.scss";
+@import "@/assets/css/public/header/index.scss";
+
 </style>
