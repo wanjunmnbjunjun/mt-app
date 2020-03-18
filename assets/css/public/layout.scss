@@ -1,9 +1,8 @@
 .el-header,
 .el-main,
 .el-footer {
-  width: 1190px;
-  margin: 0 auto;
-  padding: 0;
+  min-width: 1190px;
+  padding: 0 !important;
   overflow: unset;
 }
 
