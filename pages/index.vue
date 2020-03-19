@@ -28,7 +28,7 @@
           </ul>
         </el-row>
         <el-row>
-          <life /> 
+          <lift /> 
         </el-row>
 
         
