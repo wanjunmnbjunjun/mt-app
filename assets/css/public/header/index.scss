@@ -26,6 +26,7 @@
         margin: 0 auto;
         height: 157px;
         background: #fff;
+        
       }
     }
   }
@@ -331,10 +332,11 @@
         }
 
         dl {
+          background: #fff;
           box-sizing: border-box;
           width: 470px;
           position: absolute;
-          top: 39px;
+          top: 41px;
           border: 1px solid #dcdfe6;
           box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
           border-top: none;
@@ -343,6 +345,7 @@
           text-align: left;
           font-size: 12px;
           color: #999;
+          z-index: 9999;
 
           &.hotPlace {
             padding: 8px;
