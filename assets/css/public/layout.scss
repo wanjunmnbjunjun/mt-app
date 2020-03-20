@@ -9,7 +9,14 @@
 .el-footer {
   width: 1190px;
   margin: 0 auto;
+
 }
+.el-footer {
+  height: auto !important;
+  margin-top: 50px;
+
+}
+
 
 
 
@@ -23,5 +30,4 @@
     "MIcrosoft YaHei",
     sans-serif !important;
   background-color: #F8F8F8;
-  overflow-y: scroll;
 }
