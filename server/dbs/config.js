@@ -7,30 +7,30 @@ export default {
     },
     get port() {
       return 6379
-
-    },
-    smtp: {
-      get host() {
-        return "smtp.qq.com"
-      },
-      get user() {
-        return "871596705@qq.com"
-      },
-      get pass() {
-        return "oyqqwxozpncabfac"
-      },
-      get code() {
-        return () => {
-          return Math.random().toString(16).slice(2, 6).toUpperCase()
-
-        }
-      },
-      get expire() {
-        return () => {
-          return new Data().gettime() + 1000*60
-        }
-      }
-
     }
+
+  },
+  smtp: {
+    get host() {
+      return "smtp.qq.com"
+    },
+    get user() {
+      return "871596705@qq.com"
+    },
+    get pass() {
+      return "oyqqwxozpncabfac"
+    },
+    get code() {
+      return () => {
+        return Math.random().toString(16).slice(2, 6).toUpperCase()
+
+      }
+    },
+    get expire() {
+      return () => {
+        return new Date().getTime() + 1000 * 60
+      }
+    }
+
   }
 }

@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import CryptoJs from 'crypto-js'
 export default {
   layout: "blank",
   data() {
@@ -109,9 +110,58 @@ export default {
     };
   },
   methods: {
-    register() {},
-    sendMsg() {},
-    register() {}
+    register() {
+      let self = this
+      this.$refs["ruleForm"].vaildata(vaild => {
+        if(vaild){
+          self.$axios.post('/users/sinup',{
+            
+          })
+        }
+      })
+
+    },
+    sendMsg() {
+      const self = this;
+      let namePass;
+      let emailPass;
+      if (self.timeid) {
+        return false;
+      }
+      this.$refs["ruleForm"].validateField("name", vaild => {
+        namePass = vaild;
+      });
+      self.statusMsg = "";
+      if (namePass) {
+        return false;
+      }
+      this.$refs["ruleForm"].validateField("email", vaild => {
+        emailPass = vaild;
+      });
+      console.log(window.encodeURIComponent(self.ruleForm.name));
+      
+      if (!namePass && !emailPass) {
+        self
+          .$axios.post("/users/verify", {
+            username: window.encodeURIComponent(self.ruleForm.name),
+            email: self.ruleForm.email
+          })
+          .then(({ status, data }) => {
+            if (status == 200 && data && data.code === 0) {
+              let count = 60;
+              self.statusMsg = `验证码已发送，剩余${count--}秒`;
+              self.timeid = setInterval(() => {
+                self.statusMsg = `验证码已发送，剩余${count--}秒`;
+                if (count == 0) {
+                  clearInterval(self.timeid);
+                }
+              }, 1000);
+            }else{
+              self.statusMsg = data.msg
+            }
+          });
+      }
+    }
   }
 };
 </script>

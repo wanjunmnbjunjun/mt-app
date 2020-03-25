@@ -4,7 +4,7 @@
       <my-header></my-header>
     </el-header>
     <el-main>
-      <!-- <nuxt /> -->
+      <nuxt />
     </el-main>
     <el-footer>
       <my-footer />

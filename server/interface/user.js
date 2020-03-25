@@ -12,6 +12,7 @@ const router = new Router({
 
 })
 let Store = new Redis().client
+
 router.post("/sinup", async (ctx) => {
   const {
     username,
@@ -124,12 +125,11 @@ router.post("/verify", async (ctx, next) => {
     }else{
       Store.hmsetset(`nodemail:${ko.user}`,"code",ko.code,"expire",ko.expire,"email",ko.email)
     }
-    ctx.body={
-      code:0,
-      msg:"验证码已发送，可能会有延时，有效期1分钟"
-    }
-
   })
+  ctx.body={
+    code:0,
+    msg:"验证码已发送，可能会有延时，有效期1分钟"
+  }
 
 })
 router.get("/exit",async (ctx)=>{
