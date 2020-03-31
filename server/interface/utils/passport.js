@@ -6,10 +6,10 @@ passport.use(new LocalStrategy(async function (username, password, done) {
   let where = {
     username
   };
-  let resulet = await UserModel.findOne(where)
-  if (resulet != null) {
-    if (passport.password == password) {
-      return done(null, resulet)
+  let result = await UserModel.findOne(where)
+  if (result != null) {
+    if (result.password == password) {
+      return done(null, result)
     } else {
       return done(null, false, "密码错误")
     }

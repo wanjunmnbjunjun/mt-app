@@ -24,6 +24,8 @@
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
           <el-input v-model="ruleForm.email" />
+        </el-form-item>
+        <el-form-item>
           <el-button size="mini" round @click="sendMsg">发送验证码</el-button>
           <span class="status">{{ statusMsg }}</span>
         </el-form-item>
@@ -112,10 +114,28 @@ export default {
   methods: {
     register() {
       let self = this
-      this.$refs["ruleForm"].vaildata(vaild => {
-        if(vaild){
-          self.$axios.post('/users/sinup',{
-            
+      this.$refs["ruleForm"].validate(valid => {
+        if(valid){
+          self.$axios.post('/users/signup',{
+            username :window.encodeURIComponent(self.ruleForm.name),
+            password: CryptoJs.MD5(self.ruleForm.pwd).toString(),
+            email:self.ruleForm.email,
+            code:self.ruleForm.code
+          }).then(({status,data})=>{
+            if(status == 200 ){
+              if(data && data.code === 0){
+                location.href = "/login"
+              }else{
+                self.error = data.msg
+              }
+
+            }else{
+              self.error = `服务器出错，错误妈：${status}`
+            }
+            setTimeout(function(){
+              self.error = ''
+            },1500)
+
           })
         }
       })
@@ -128,18 +148,16 @@ export default {
       if (self.timeid) {
         return false;
       }
-      this.$refs["ruleForm"].validateField("name", vaild => {
-        namePass = vaild;
+      this.$refs["ruleForm"].validateField("name", valid => {
+        namePass = valid;
       });
       self.statusMsg = "";
       if (namePass) {
         return false;
       }
-      this.$refs["ruleForm"].validateField("email", vaild => {
-        emailPass = vaild;
+      this.$refs["ruleForm"].validateField("email", valid => {
+        emailPass = valid;
       });
-      console.log(window.encodeURIComponent(self.ruleForm.name));
-      
       if (!namePass && !emailPass) {
         self
           .$axios.post("/users/verify", {
@@ -154,6 +172,7 @@ export default {
                 self.statusMsg = `验证码已发送，剩余${count--}秒`;
                 if (count == 0) {
                   clearInterval(self.timeid);
+                  self.timeid = null
                 }
               }, 1000);
             }else{
