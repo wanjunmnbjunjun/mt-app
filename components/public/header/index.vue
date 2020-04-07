@@ -4,7 +4,7 @@
       <div class="m-top">
         <el-col :span="5">
           <div class="m-geo">
-            <i class="el-icon-location" />北京
+            <i class="el-icon-location" />{{$store.state.geo.position.city}}
             <nuxt-link class="changeCity" to="/changeCity">切换城市</nuxt-link>
             <span>[</span>
             <nuxt-link to="/changeCity">太原</nuxt-link>

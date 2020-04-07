@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 export default {
   data() {
     return {
@@ -60,9 +61,9 @@ export default {
       },200)
 
     },
-    input(){
-      console.log(this.search)
-    }
+    input: _.debounce(async function(){
+      
+    })
 
   }
 };

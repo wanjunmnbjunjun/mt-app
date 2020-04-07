@@ -12,12 +12,12 @@
           <img src="https://s0.meituan.net/bs/fe-web-meituan/e350c4a/img/avatar.jpg" alt />
           <p>Hi！你好</p>
           <p>
-            <nuxt-link to="/aa">
+            <nuxt-link to="/register">
               <el-button round>注册</el-button>
             </nuxt-link>
           </p>
           <p>
-            <nuxt-link to="/aaa">
+            <nuxt-link to="/login">
               <el-button round>立即登陆</el-button>
             </nuxt-link>
           </p>
