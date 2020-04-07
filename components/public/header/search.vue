@@ -17,22 +17,11 @@
           <i class="el-icon-search" />
         </button>
         <dl class="searchlist"  v-if="isFocus&&search">
-          <dd><a href="javesrript:;">烤鸭1</a></dd>
-          <dd><a href="javesrript:;">烧烤3</a></dd>
-          <dd><a href="javesrript:;">火锅4</a></dd>
-          <dd><a href="javesrript:;">烤鸭5</a></dd>
-          <dd><a href="javesrript:;">烤鸭6</a></dd>
+          <dd v-for="(item,index) in searchList" :key="index"><a href="javesrript:;">{{item.name}}</a></dd>
         </dl>
         <dl class="hotPlace" v-if="isFocus&&!search">
-          <dt>最近搜索</dt>
-          <dd><a href="javesrript:;">烤鸭</a></dd>
-          <dd><a href="javesrript:;">烧烤</a></dd>
-          <dd><a href="javesrript:;">火锅</a></dd>
-          <dd><a href="javesrript:;">烤鸭</a></dd>
-          <dd><a href="javesrript:;">烤鸭</a></dd>
           <dt>热门搜索</dt>
-          <dd>天安门</dd>
-          <dd>故宫</dd>
+          <dd v-for="(item,index) in $store.state.home.hotPlace" :key="index"><a href="javesrript:;">{{item.name}}</a></dd>
         </dl>
         
 
@@ -48,6 +37,7 @@ export default {
     return {
       search: "",
       isFocus:false,
+      searchList:[]
 
     };
   },
@@ -62,8 +52,21 @@ export default {
 
     },
     input: _.debounce(async function(){
+      let self = this
+      let city = this.$store.state.geo.position.city.replace("市","")
+      self.searchList = []
+      let {status,data:{top}} = await this.$axios.get('/search/top',{
+        params:{
+          input:self.search,
+          city:city
+        }
+      })
+      if(status == 200){
+        self.searchList = top.slice(0,10)
+      }
       
-    })
+    },300)
+    
 
   }
 };
